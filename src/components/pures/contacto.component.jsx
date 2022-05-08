@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState }from 'react';
 import PropTypes from 'prop-types';
 import { Contacto } from '../models/contacto.class';
 
 const ContactoComponent = ({ contacto }) => {
+
+    const [estado, setestado] = useState(contacto.connected);
+
+    /**
+     * Función para cambiar estados del contacto
+     */
+    const fnCambiarEstado = () => {
+        setestado(!estado);
+    };
+
     return (
         <div>
             <p>
@@ -15,8 +25,9 @@ const ContactoComponent = ({ contacto }) => {
                 Email: { contacto.email }
             </p>
             <p>
-                El contacto está: { contacto.connected ? "Conectado" : "Desconectado" }
+                Contacto { estado ? "En Linea" : "No Disponible" }
             </p>
+            <button onClick={fnCambiarEstado}>Cambiar Estado</button>
         </div>
     );
 };
